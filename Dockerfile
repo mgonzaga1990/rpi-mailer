@@ -1,8 +1,4 @@
-FROM debian
-
-RUN apt-get update && apt-get install -y swaks
-
-COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x ./entrypoint.sh
-
-ENTRYPOINT ./entrypoint.sh
+FROM alpine
+RUN apk add --update perl perl-net-dns
+ADD http://www.jetmore.org/john/code/swaks/files/swaks-20170101.0/swaks swaks
+ENTRYPOINT ["/usr/bin/perl", "swaks"]
